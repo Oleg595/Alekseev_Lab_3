@@ -1,0 +1,15 @@
+EXECUTOR 1 = Reader.Reader
+EXECUTOR 2 = Coding.Coding
+EXECUTOR 3 = java_utils.MWriter
+
+NUM_EXECUTORS = 3
+
+READER_INPUT = configs\Writer_configs\output
+
+CONFIGURATION 1 = configs\Writer_configs\readerconfig
+
+WRITER_OUTPUT = configs\Writer_configs\encoded
+
+CONFIGURATION 3 = configs\Writer_configs\writer_config
+
+CONFIGURATION 2 = configs\Writer_configs\firstconf_decoded
