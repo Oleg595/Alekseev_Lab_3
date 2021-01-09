@@ -47,6 +47,9 @@ public class Writer implements IWriter {
 
     private byte[] Input_Data(){
         TYPE t = Cast.Input_Type(types, producer.getOutputTypes());
+        if(mediator.getData() == null){
+            return null;
+        }
         if(t == TYPE.SHORT) {
             return Cast.ShortToByte((short[])mediator.getData());
         }
@@ -62,6 +65,9 @@ public class Writer implements IWriter {
     public RC execute(){
         try {
             byte[] data = Input_Data();
+            if(data == null){
+                return RC.CODE_SUCCESS;
+            }
             write.write(data);
         }
         catch(IOException e) {
