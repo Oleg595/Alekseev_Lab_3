@@ -90,6 +90,9 @@ public class Reader implements IReader {
     class Byte_Mediator implements IMediator {
 
         public Object getData(){
+            if(data == null){
+                return null;
+            }
             return Cast.Copy(data);
         }
 
@@ -98,6 +101,9 @@ public class Reader implements IReader {
     class Char_Mediator implements IMediator {
 
         public Object getData(){
+            if(data == null){
+                return null;
+            }
             return Cast.ByteToChar(Cast.Copy(data));
         }
 
@@ -106,6 +112,9 @@ public class Reader implements IReader {
     class Short_Mediator implements IMediator {
 
         public Object getData(){
+            if(data == null){
+                return null;
+            }
             return Cast.ByteToShort(Cast.Copy(data));
         }
 
@@ -117,16 +126,21 @@ public class Reader implements IReader {
             int end = buffer_size;
             while(end == buffer_size){
                 end = reader.read(arr);
-                if(end == -1){
-                    break;
+                if(end != -1) {
+                    data = new byte[end];
                 }
-                data = new byte[end];
+                else{
+                    data = null;
+                }
                 for(int i = 0; i < end; i++){
                     data[i] = arr[i];
                 }
                 RC rc = consumer.execute();
                 if(rc != RC.CODE_SUCCESS){
                     return rc;
+                }
+                if(arr == null){
+                    break;
                 }
                 arr = new byte[buffer_size];
             }
