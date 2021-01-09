@@ -56,6 +56,9 @@ public class Coding implements IExecutor {
 
     private byte[] Input_Data(){
         TYPE t = Cast.Input_Type(types, producer.getOutputTypes());
+        if(mediator.getData() == null){
+            return null;
+        }
         if(t == TYPE.SHORT) {
             return Cast.ShortToByte((short[])mediator.getData());
         }
@@ -105,6 +108,10 @@ public class Coding implements IExecutor {
     public RC execute(){
         try {
             byte[] data = Input_Data();
+            if(data == null){
+                ans = null;
+                return consumer.execute();
+            }
             if (mode == CodingGrammar.MODE.ENCODING) {
                 int Size_Elem = data.length;
                 symb = new Symbols(data);
@@ -148,6 +155,9 @@ public class Coding implements IExecutor {
     class Byte_Mediator implements IMediator {
 
         public Object getData(){
+            if(ans == null){
+                return null;
+            }
             return Cast.Copy(ans);
         }
 
@@ -156,6 +166,9 @@ public class Coding implements IExecutor {
     class Short_Mediator implements IMediator {
 
         public Object getData(){
+            if(ans == null){
+                return null;
+            }
             return Cast.ByteToShort(Cast.Copy(ans));
         }
 
