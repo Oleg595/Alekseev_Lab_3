@@ -10,7 +10,6 @@
     <orderEntry type="library" name="Writer" level="project" />
     <orderEntry type="library" name="Reader" level="project" />
     <orderEntry type="library" name="Executor" level="project" />
-    <orderEntry type="library" name="Manager" level="project" />
     <orderEntry type="library" name="interfaces" level="project" />
     <orderEntry type="library" name="Executor_1" level="project" />
     <orderEntry type="library" name="Reader_1" level="project" />
